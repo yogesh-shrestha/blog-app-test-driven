@@ -1,0 +1,130 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'blog.css' %}" >
+{% endblock %}
+
+{% block title %} Post Detail {% endblock %}
+
+
+
+{% block content %}
+    <div class = "col-lg-8">
+        {% if post.status_published %}
+        <h4> {{ post.title | title }} </h4>
+        <small> 
+            {{post.author.first_name}} 
+            {{post.author.last_name}}, 
+            {{ post.published_date.date}},
+        </small>
+        <small>
+            {% for category in post.category.all %}
+            <a href="{% url 'blog:category_post_page' category.id %}" 
+                class="link-primary text-decoration-none">{{ category.name }}
+            </a>{% if forloop.last %}{% else %}, {% endif%}
+            {% endfor %}
+        </small>
+
+        <hr>
+        <div>
+            <img src="{{post.header_image.url}}" class="image-fit"/>
+        </div>
+        <p> {{ post.body | safe }} </p>
+        <br>
+        {% if tagged_items %}
+            Tags: 
+            {% for tagged_item in tagged_items %}
+                <a href="{% url 'blog:tag_post_page' tagged_item.tag_id %}" 
+                    class="link-primary text-decoration-none">{{ tagged_item.tag.label }}
+                </a>{% if forloop.last %}{% else %}, {% endif%}
+            {% endfor %}
+        {% endif %}
+        <hr>
+
+        <h4>Written by {{post.author.first_name}} {{post.author.last_name}}</h4>
+        {% if post.author.profile %}
+            <div class="row">  
+                <div class="col-lg-2">
+                    {% if post.author.profile.fb_url %}
+                        <a href="{{ post.author.profile.fb_url }}">
+                            <i class="fa-brands fa-facebook" 
+                                style="font-size:22px; color:#4267B2;">
+                            </i>
+                        </a>
+                    {% endif %}
+                    {% if post.author.profile.twitter_url %}
+                    | <a href="{{ post.author.profile.twitter_url }}">
+                        <i class="fa-brands fa-twitter" 
+                            style="font-size:22px; color:#4267B2;">
+                        </i>
+                    </a>
+                    {% endif %}
+                    {% if post.author.profile.insta_url%}
+                        |<a href="{{ post.author.profile.insta_url }}">
+                            <i class="fa-brands fa-instagram" 
+                                style="font-size:22px; color:#C13584;">
+                            </i>
+                        </a>
+                    {% endif %}
+                    <br>
+                    <div>
+                    {% if post.author.profile.profile_pic %}
+                        <img src=" {{ post.author.profile.profile_pic.url }} " 
+                            alt="" 
+                            class="rounded-circle image-fit">
+                    {% else %}
+                        <img src="https://imageupload.io/ib/YJabjk489XJ8c66_1695283035.jpg" 
+                            alt="" 
+                            class="rounded-circle image-fit">                    
+                    {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-lg-10">
+                    {% if post.author.profile.bio %}
+                        {{ post.author.profile.bio }}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        <hr>
+        <h4>Comments</h4>
+        <div form="form-group">
+            <form action="", method="POST" class="form-control">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group has-validation">
+                        <div class="mb-3">
+                            <label class="form-label">{{ field.label_tag }}</label> 
+                            {{ field }}
+                        </div>
+                        {% if field.errors %}
+                                {% for error in field.errors %}
+                                <div class="invalid-message">
+                                    {{ error|escape }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button class="btn btn-primary theme-color">Add Comment</button>
+            </form>
+        </div>
+        <hr>
+        {% if comments %}
+            {% for comment in comments %}
+                <strong>{{ comment.name }}</strong>, {{ comment.published_date.date }} <br>
+                {{ comment.comment }}
+                <hr>
+            {% endfor %}
+        {% endif %}
+        <br><br>
+        {% else %}
+            <h3>The post has not been published yet!</h3>
+        {% endif %}
+    </div>
+    <div class="col-4"> </div>
+
+{% endblock %}

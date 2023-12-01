@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link href="{% static 'blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} Not found {% endblock %}
+
+{% block content %}
+    <h2>You do not have permission to this page !!!</h2>
+{% endblock %}

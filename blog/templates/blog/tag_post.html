@@ -1,0 +1,57 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link href="{% static 'blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} tag posts {% endblock %}
+
+{% block content %}
+    <h3>Tag: <em>{{tag_label}}</em></h3>
+    <hr><br>
+
+    {% for post in page_obj %}
+      <div class="col-lg-4 d-flex align-items-stretch mb-3">
+        <div class="card">
+        <img src={{post.header_image.url}} class="img-responsive" alt="...">
+        <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'blog:post_detail_page' post.id %}" class="text-dark text-decoration-none">{{ post.title }}</a></h5>
+            <p class="card-text">{{ post.body | safe | slice:":300"}}</p>
+        </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    <br><br>
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <span class="page-link">
+                <a href="?page={{ page_obj.previous_page_number }}" class="text-decoration-none"><</a>
+            </span>
+          </li>
+        {% endif %}
+
+        {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="page-item active" aria-current="page">
+                <a href="?page={{i}}"  class="page-link">{{ i }} </a>
+            </li>
+            {% else %}
+            <li class="page-item">
+              <a href="?page={{i}}" class="page-link">{{ i }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">></a>
+          </li>
+        {% endif %}
+        </ul>
+    </nav>
+
+{% endblock %}

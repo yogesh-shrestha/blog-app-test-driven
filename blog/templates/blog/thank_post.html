@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link href="{% static 'blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} thanks {% endblock %}
+
+{% block content %}
+    <h2>Thanks for your post, it must be published by admin !!!</h2>
+{% endblock %}

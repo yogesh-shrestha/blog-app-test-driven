@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link href="{% static 'blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} Not found {% endblock %}
+
+{% block content %}
+    <h2>The page you are looking for could not be found !!!</h2>
+{% endblock %}

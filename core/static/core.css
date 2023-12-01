@@ -1,0 +1,13 @@
+.invalid-message {
+    padding-bottom: 1rem;
+    color: red;
+}
+
+.theme-color {
+    background-color: #3279a8;
+}
+
+.image-fit {
+    max-width:100%; 
+    max-height:100%
+}

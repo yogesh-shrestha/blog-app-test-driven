@@ -1,0 +1,19 @@
+
+.theme-color {
+    background-color: #3279a8;
+}
+
+.image-fit {
+    max-width:100%; 
+    max-height:100%
+}
+
+.post-card {
+    height: 800px;
+}
+
+.page-item.active .page-link {
+    color: #fff !important;
+    background: #3279a8 !important;
+  }
+

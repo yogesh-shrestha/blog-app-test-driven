@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link href="{% static 'blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} Sign Out {% endblock %}
+
+
+{% block content %}
+<div class="col-md-8">
+    <h4> {{user.first_name}} {{user.last_name}} </h4>
+    <a href="{% url 'blog:edit_profile_page' user.profile.id %}">Edit Profile </a>
+    <hr>
+    <div class="row">
+        <div class="col-md-3">
+        {% if user.profile.profile_pic %}
+            <img src=" {{ user.profile.profile_pic.url }} " 
+                alt="" 
+                class="rounded-circle image-fit" />
+        {% else %}
+            <img src="https://imageupload.io/ib/YJabjk489XJ8c66_1695283035.jpg" 
+                alt="" 
+                class="rounded-circle image-fit" />                    
+        {% endif %}                
+        </div>
+        <div class="col-md-9">
+            <b>Bio: </b>
+            {{user.profile.bio}}
+        </div>
+    </div>
+    <br>
+    <b>Facebook: </b> {{user.profile.fb_url}} <br>
+    <b>Twitter: </b> {{user.profile.twitter_url}} <br>
+    <b>Instagram: </b> {{user.profile.insta_url}} <br>
+    <hr>
+</div>
+<div class="col-md-4"></div>
+{% endblock %}

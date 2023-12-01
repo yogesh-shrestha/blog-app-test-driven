@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link href="{% static 'blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} Sign In {% endblock %}
+
+
+{% block content %}
+<br><br><br><br><br>
+<div class="d-flex justify-content-center">
+    <div class="card col-md-6">
+        <div class="card-header">
+            <h5>Edit Profile</h5>
+        </div>
+        <div class="card-body">
+            <form action="", method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="form-group has-validation">
+                    <div class="mb-3">
+                        <label class="form-label">{{ field.label_tag }}</label> 
+                        {{ field }}
+                    </div>
+                    {% if field.errors %}
+                            {% for error in field.errors %}
+                            <div class="invalid-message">
+                                {{ error|escape }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <button class="btn btn-primary theme-color">Edit Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
