@@ -17,7 +17,7 @@ Key features: <br>
 - Build and Run the images (multi-container application) <br>
 `docker-compose up --build`
 
-Fake SMTP Server runs at http://localhost:5000/ <br>
+Fake SMTP Server runs at http://localhost:5000/ ( https://github.com/rnwood/smtp4dev)<br>
 Development server starts at http://localhost:8000/
 
 <b>Superuser credentials </b> <br>
