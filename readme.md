@@ -10,7 +10,9 @@ Key features: <br>
 
 #### Running Blogger app locally on your system
 - Clone the repository <br>
-`git@github.com:yogesh-shrestha/yogblog-test-driven-docker.git`
+`git@github.com:yogesh-shrestha/blog-app-test-driven.git`
+- Change directory <br>
+`cd blog-app-test-driven`
 - Build and Run the images (multi-container application) <br>
 `docker-compose up --build`
 
