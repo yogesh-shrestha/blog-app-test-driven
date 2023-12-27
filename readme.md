@@ -2,7 +2,8 @@
 Blooger app where users can sign up and start adding posts.
 
 Key features: <br>
-    - Sending emails (filling up contact form and sending email). Fake SMTP server <em> Smtp4dev </em> is used for it. <br>
+    - Default Django Authentication system. Users can sign up, sign in, change password, reset password, sign out.<br>
+    - <em>ContenType</em> Model and Custom Managers for tagging posts.<br> 
     - Use of <em>Celery</em> to take email sending task off the request/response cycle. <br>
     - Use of <em>Redis</em> as message broker and for caching. <br>
 
